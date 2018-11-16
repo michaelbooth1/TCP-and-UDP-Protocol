@@ -1,25 +1,33 @@
 import socket
 
-TCP_IP = '192.168.50.158'           # IP address to connect to
-TCP_PORT = 5005                     # Port to connect to
-BUFFER_SIZE = 1024                  # Buffer size for receiving message
+TCP_IP = 'X.X.X.X'
+TCP_PORT = 5005
+BUFFER_SIZE = 1024
 
 
-print ("Attempting to contact server at ",TCP_IP,":",TCP_PORT)
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)               # Establish socket
-s.connect((TCP_IP, TCP_PORT))                                       # Connect on pre-determined IP and Port
-print ("Connection to Server Established")
+def sendPacket():
+    """
+    Connect to socket and send message over TCP
 
-while True:
-    message = input("Enter command to send to server: ")            # Get message from user
-    s.sendall(str.encode(message))                                  # Encode the message to bytes and send
-    data = s.recv(BUFFER_SIZE)                                      # Recive response
-    if not data:                                                    # If response is empty, end connection
-        break
-    print(data.decode("ascii"))                                     # Else display response
+    Exit when empty string is return from server
+    """""
 
-print("Connection to Server Terminated")
-s.close()                                                           # Close connection
+    print ("Attempting to contact server at ", TCP_IP, ":", TCP_PORT)
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.connect((TCP_IP, TCP_PORT))
+    print ("Connection to Server Established")
+
+    while True:
+        message = input("Enter command to send to server: ")
+        s.sendall(str.encode(message))
+        data = s.recv(BUFFER_SIZE)
+        if not data:
+            break
+        print(data.decode("ascii"))
+
+    print("Connection to Server Terminated")
+    s.close()
 
 
-
+def __main__(self):
+    sendPacket()
